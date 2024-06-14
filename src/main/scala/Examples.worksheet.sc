@@ -1,32 +1,35 @@
-import java.security.cert.CertificateFactory
-import javax.net.ssl.TrustManager
-import javax.net.ssl.KeyManager
-import javax.net.ssl.SSLSocketFactory
-import java.security.KeyStore
-import javax.crypto.spec.PBEParameterSpec
-import java.security.SecureRandom
-import java.util.Base64
-import javax.crypto.spec.SecretKeySpec
-import javax.crypto.spec.PBEKeySpec
-import javax.crypto.SecretKeyFactory
-import java.security.Security
 import java.io.FileInputStream
 import java.io.InputStream
-import scala.io.Source
-import java.nio.file.Files
-import java.nio.charset.Charset
-import java.nio.file.Paths
 import java.net.InetAddress
+import java.nio.charset.Charset
+import java.nio.file.Files
+import java.nio.file.Paths
 import java.security.cert.CertPathBuilder
 import java.security.cert.CertPathParameters
-import java.security.cert.PKIXBuilderParameters
-import java.util.EnumSet
-import java.security.cert.PKIXRevocationChecker
 import java.security.cert.CertPathValidator
+import java.security.cert.CertificateFactory
+import java.security.cert.PKIXBuilderParameters
+import java.security.cert.PKIXRevocationChecker
 import java.security.KeyFactory
+import java.security.KeyStore
+import java.security.SecureRandom
+import java.security.Security
+import java.util.Base64
+import java.util.EnumSet
+
+import scala.io.Source
+
+import javax.crypto.spec.PBEKeySpec
+import javax.crypto.spec.PBEParameterSpec
+import javax.crypto.spec.SecretKeySpec
+import javax.crypto.SecretKeyFactory
+import javax.net.ssl.KeyManager
 import javax.net.ssl.KeyManagerFactory
+import javax.net.ssl.SSLSocketFactory
+import javax.net.ssl.TrustManager
 import javax.net.ssl.TrustManagerFactory
 import sun.security.x509.X509CertImpl
+
 val trustManagerFactory =
   TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm())
 //X509ExtendedTrustManager
@@ -71,6 +74,7 @@ def dnsResolver(domain: String) = InetAddress.getByName(domain).getHostAddress()
 
 def dnsResolver3(domain: String) =
   InetAddress.getByName(domain).getCanonicalHostName()
+
 List("google.com", "youtube.com", "localhost", "premierdev.org").map(
   dnsResolver
 )
@@ -78,13 +82,14 @@ List("google.com", "youtube.com", "localhost", "premierdev.org").map(
   dnsResolver3
 )
 
-import javax.net.ssl.SSLServerSocketFactory
-import javax.net.ssl.SSLServerSocket
-import javax.net.ServerSocketFactory
 import javax.net.ssl.SSLContext
-import javax.net.ssl.SSLSessionContext
-import javax.net.ssl.SSLSession
 import javax.net.ssl.SSLEngine
+import javax.net.ssl.SSLServerSocket
+import javax.net.ssl.SSLServerSocketFactory
+import javax.net.ssl.SSLSession
+import javax.net.ssl.SSLSessionContext
+import javax.net.ServerSocketFactory
+
 val ssf = SSLServerSocketFactory.getDefault
 
 //val serverSocket=ssf.createServerSocket(8090)
@@ -135,23 +140,11 @@ providers.foreach { provider =>
 // Apple Provider
 // Unconfigured and unusable PKCS11 provider
 
-Security
-  .getProvider("SUN")
-  .getServices()
-  .asScala
-  .foreach(s => println(s.getAlgorithm()))
+Security.getProvider("SUN").getServices().asScala.foreach(s => println(s.getAlgorithm()))
 
-Security
-  .getProvider("SunRsaSign")
-  .getServices()
-  .asScala
-  .foreach(s => println(s.getAlgorithm()))
+Security.getProvider("SunRsaSign").getServices().asScala.foreach(s => println(s.getAlgorithm()))
 
-Security
-  .getProvider("SunEC")
-  .getServices()
-  .asScala
-  .foreach(s => println(s.getAlgorithm()))
+Security.getProvider("SunEC").getServices().asScala.foreach(s => println(s.getAlgorithm()))
 
 // SUN
 // SunRsaSign
@@ -166,73 +159,33 @@ Security
 // JdkSASL
 // SunPKCS11
 
-Security
-  .getProvider("SunJSSE")
-  .getServices()
-  .asScala
-  .foreach(s => println(s.getAlgorithm()))
+Security.getProvider("SunJSSE").getServices().asScala.foreach(s => println(s.getAlgorithm()))
 
-Security
-  .getProvider("SunJCE")
-  .getServices()
-  .asScala
-  .foreach(s => println(s.getAlgorithm()))
+Security.getProvider("SunJCE").getServices().asScala.foreach(s => println(s.getAlgorithm()))
 
-Security
-  .getProvider("SunJGSS")
-  .getServices()
-  .asScala
-  .foreach(s => println(s.getAlgorithm()))
+Security.getProvider("SunJGSS").getServices().asScala.foreach(s => println(s.getAlgorithm()))
 
-Security
-  .getProvider("SunSASL")
-  .getServices()
-  .asScala
-  .foreach(s => println(s.getAlgorithm()))
+Security.getProvider("SunSASL").getServices().asScala.foreach(s => println(s.getAlgorithm()))
 
-Security
-  .getProvider("XMLDSig")
-  .getServices()
-  .asScala
-  .foreach(s => println(s.getAlgorithm()))
+Security.getProvider("XMLDSig").getServices().asScala.foreach(s => println(s.getAlgorithm()))
 
-Security
-  .getProvider("SunPCSC")
-  .getServices()
-  .asScala
-  .foreach(s => println(s.getAlgorithm()))
+Security.getProvider("SunPCSC").getServices().asScala.foreach(s => println(s.getAlgorithm()))
 
-Security
-  .getProvider("JdkLDAP")
-  .getServices()
-  .asScala
-  .foreach(s => println(s.getAlgorithm()))
+Security.getProvider("JdkLDAP").getServices().asScala.foreach(s => println(s.getAlgorithm()))
 
-Security
-  .getProvider("JdkSASL")
-  .getServices()
-  .asScala
-  .foreach(s => println(s.getAlgorithm()))
+Security.getProvider("JdkSASL").getServices().asScala.foreach(s => println(s.getAlgorithm()))
 
-Security
-  .getProvider("SunPKCS11")
-  .getServices()
-  .asScala
-  .foreach(s => println(s.getAlgorithm()))
+Security.getProvider("SunPKCS11").getServices().asScala.foreach(s => println(s.getAlgorithm()))
 
-Security
-  .getProvider("Apple")
-  .getServices()
-  .asScala
-  .foreach(s => println(s.getAlgorithm()))
+Security.getProvider("Apple").getServices().asScala.foreach(s => println(s.getAlgorithm()))
 
 def getKeyFromPassword(password: String, algorithm: String) = {
-  val random  = new SecureRandom()
-  val salt    = Array[Byte](16)
+  val random = new SecureRandom()
+  val salt   = Array[Byte](16)
   random.nextBytes(salt)
   val g       = scala.util.Random.alphanumeric.take(4096).map(_.toByte).toArray
   val factory = SecretKeyFactory.getInstance(algorithm)
-  val spec    =
+  val spec =
     new PBEKeySpec(password.toCharArray(), g, 65536, 512); // 310,000 recommended for PBKDF2
   val originalKey =
     new SecretKeySpec(factory.generateSecret(spec).getEncoded(), "AES")
@@ -243,32 +196,40 @@ val encoder = Base64.getEncoder()
 
 encoder.encodeToString(getKeyFromPassword("hellopassword", "PBKDF2WithHmacSHA512").getEncoded) //).length()
 
-encoder.encodeToString(getKeyFromPassword("hellopassword", "PBKDF2WithHmacSHA224").getEncoded()).length()
+encoder
+  .encodeToString(getKeyFromPassword("hellopassword", "PBKDF2WithHmacSHA224").getEncoded())
+  .length()
 
-encoder.encodeToString(getKeyFromPassword("hellopassword", "PBKDF2WithHmacSHA512").getEncoded()).length()
+encoder
+  .encodeToString(getKeyFromPassword("hellopassword", "PBKDF2WithHmacSHA512").getEncoded())
+  .length()
 
 encoder.encodeToString(getKeyFromPassword("hellopassword", "PBKDF2WithHmacSHA512").getEncoded())
 encoder.encodeToString(getKeyFromPassword("hellopassword", "PBKDF2WithHmacSHA512").getEncoded())
-encoder.encodeToString(getKeyFromPassword("hellopassword", "PBKDF2WithHmacSHA384").getEncoded()).length()
+encoder
+  .encodeToString(getKeyFromPassword("hellopassword", "PBKDF2WithHmacSHA384").getEncoded())
+  .length()
 
 encoder.encodeToString(getKeyFromPassword("hellopassword", "PBKDF2WithHmacSHA512").getEncoded())
 // PBEWithHmacSHA512
 // PBEWithHmacSHA512AndAES_128
 // PBEWithHmacSHA512AndAES_256
-encoder.encodeToString(getKeyFromPassword("hellopassword", "PBEWithHmacSHA512AndAES_256").getEncoded())
+encoder
+  .encodeToString(getKeyFromPassword("hellopassword", "PBEWithHmacSHA512AndAES_256").getEncoded())
 
-import javax.crypto.spec.IvParameterSpec
+import java.security.cert.CertStore
+import java.security.interfaces
+import java.security.spec
+
 import javax.crypto.spec.DHGenParameterSpec
 import javax.crypto.spec.DHParameterSpec
 import javax.crypto.spec.DHPrivateKeySpec
 import javax.crypto.spec.DHPublicKeySpec
 import javax.crypto.spec.GCMParameterSpec
+import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.OAEPParameterSpec
 import javax.crypto.spec.SecretKeySpec
-import java.security.spec
 
-import java.security.interfaces
-import java.security.cert.CertStore
 val pbeSpec: PBEParameterSpec = new PBEParameterSpec(Array.emptyByteArray, 65536)
 
 //A Java keystore stores private key entries, certificates with public keys, or just secret keys that we may use for various cryptographic purposes.
@@ -333,25 +294,25 @@ val passwordProtection = new KeyStore.PasswordProtection(
   new PBEParameterSpec("salt".toArray.map(_.toByte), 100_000)
 )
 
-import sun.security.x509
+import javax.smartcardio._
 import sun.security.ec
 import sun.security.pkcs.PKCS7
 import sun.security.pkcs.PKCS8Key
 import sun.security.pkcs10.PKCS10
-import sun.security.pkcs11.SunPKCS11
-import sun.security.pkcs11.Secmod.TrustType
-import sun.security.pkcs11.P11Util.getMagnitude
-import sun.security.pkcs11.P11TlsMasterSecretGenerator
-import sun.security.pkcs11.P11TlsKeyMaterialGenerator
 import sun.security.pkcs11.wrapper.PKCS11
+import sun.security.pkcs11.P11TlsKeyMaterialGenerator
+import sun.security.pkcs11.P11TlsMasterSecretGenerator
+import sun.security.pkcs11.P11Util.getMagnitude
+import sun.security.pkcs11.Secmod.TrustType
+import sun.security.pkcs11.SunPKCS11
 import sun.security.pkcs12.PKCS12KeyStore
 import sun.security.provider
+import sun.security.rsa.RSAKeyFactory
+import sun.security.rsa.RSAKeyPairGenerator
+import sun.security.rsa.RSAPrivateCrtKeyImpl
 import sun.security.rsa.RSAPrivateKeyImpl
 import sun.security.rsa.RSAPublicKeyImpl
 import sun.security.rsa.RSAUtil
-import sun.security.rsa.RSAPrivateCrtKeyImpl
-import sun.security.rsa.RSAKeyPairGenerator
-import sun.security.rsa.RSAKeyFactory
 import sun.security.rsa.SunRsaSign
 import sun.security.smartcardio.SunPCSC.Factory
 import sun.security.ssl
@@ -363,20 +324,19 @@ import sun.security.ssl.SSLSocketImpl
 import sun.security.ssl.SunJSSE
 import sun.security.timestamp
 import sun.security.tools
-import sun.security.util.Pem.decode
 import sun.security.util.AnchorCertificates
-import sun.security.util.UntrustedCertificates
 import sun.security.util.CurveDB
 import sun.security.util.DerEncoder
 import sun.security.util.ECUtil
 import sun.security.util.GCMParameters
 import sun.security.util.HexDumpEncoder
-import sun.security.util.MessageDigestSpi2
-import sun.security.util.KeyUtil
 import sun.security.util.KeyStoreDelegator
+import sun.security.util.KeyUtil
+import sun.security.util.MessageDigestSpi2
+import sun.security.util.Pem.decode
+import sun.security.util.UntrustedCertificates
 import sun.security.validator
-
-import javax.smartcardio._
+import sun.security.x509
 
 val certFactory = CertificateFactory.getInstance("X.509")
 //val p=certFactory.generateCertPath(new FileInputStream("src/main/resources/certifs.pem"))

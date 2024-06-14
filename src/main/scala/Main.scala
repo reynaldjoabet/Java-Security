@@ -1,33 +1,32 @@
-import java.security.Certificate
-import java.security.cert.X509Certificate
-import javax.security.cert.Certificate
-import javax.security.cert.X509Certificate
-import java.security.cert.CertStore
-import java.security.KeyStore
-import java.security.spec.X509EncodedKeySpec
-import java.security.Security.getProviders
-import java.security.Provider
 import java.security
+import java.security.cert.CertStore
+import java.security.cert.X509Certificate
+import java.security.spec.X509EncodedKeySpec
+import java.security.Certificate
+import java.security.KeyStore
+import java.security.Provider
+import java.security.Security.getProviders
+
 import scala.jdk.CollectionConverters._
 
-import sun.security.x509.CertificateX509Key
-import sun.security.ec.SunEC
-import sun.security.util
-import sun.security.tools.keytool.CertAndKeyGen
-
-import sun.security.ssl.SunJSSE
-import sun.security.rsa.SunRsaSign
-
-import sun.security.pkcs12.PKCS12KeyStore
-import sun.security.provider.JavaKeyStore
-import sun.security.pkcs12.PKCS12KeyStore
-import sun.security.provider.Sun
-import security.PublicKey
 import apple.security.AppleProvider
 import javax.crypto.SecretKeyFactory
+import javax.security.cert.Certificate
+import javax.security.cert.X509Certificate
 import jdk.security.jarsigner
+import security.PublicKey
+import sun.security.ec.SunEC
+import sun.security.pkcs12.PKCS12KeyStore
+import sun.security.provider.JavaKeyStore
+import sun.security.provider.Sun
+import sun.security.rsa.SunRsaSign
+import sun.security.ssl.SunJSSE
+import sun.security.tools.keytool.CertAndKeyGen
+import sun.security.util
+import sun.security.x509.CertificateX509Key
 
 object Main extends App {
+
   println("Hello, World!")
   // KeyStore
 

@@ -1,6 +1,10 @@
+import java.io.FileInputStream
+import java.nio.charset.Charset
+import java.nio.file.Files
+import java.nio.file.Paths
 import java.security.cert.Certificate
+import java.security.cert.CertificateFactory
 import java.security.cert.X509Certificate
-import java.security.spec.X509EncodedKeySpec
 import java.security.spec.AlgorithmParameterSpec
 import java.security.spec.DSAGenParameterSpec
 import java.security.spec.DSAParameterSpec
@@ -33,17 +37,14 @@ import java.security.spec.RSAPublicKeySpec
 import java.security.spec.X509EncodedKeySpec
 import java.security.spec.XECPrivateKeySpec
 import java.security.spec.XECPublicKeySpec
-import java.nio.file.Files
-import java.nio.charset.Charset
 import java.security.KeyFactory
-import java.nio.file.Paths
-import javax.net.ssl.X509TrustManager
+import java.security.KeyStore.TrustedCertificateEntry
+
+import scala.jdk.CollectionConverters._
+
 import javax.net.ssl.TrustManager
 import javax.net.ssl.TrustManagerFactory
-import java.security.KeyStore.TrustedCertificateEntry
-import java.security.cert.CertificateFactory
-import scala.jdk.CollectionConverters._
-import java.io.FileInputStream
+import javax.net.ssl.X509TrustManager
 
 object CertificateChainExample extends App {
 // X509TrustManager
@@ -51,7 +52,8 @@ object CertificateChainExample extends App {
 // TrustManagerFactory
 // TrustedCertificateEntry
 
-  val certFactory  = CertificateFactory.getInstance("X.509")
+  val certFactory = CertificateFactory.getInstance("X.509")
+
   val certificates = certFactory
     .generateCertificates(
       new FileInputStream(Paths.get("src/main/resources/certifs.pem").toFile())
@@ -65,17 +67,17 @@ object CertificateChainExample extends App {
   }
   val p = certFactory.generateCertPath(new FileInputStream("../src/main/resources/certifs.pem"))
   println(p.getCertificates())
+
 }
 
-/** \- Key Derivation: The password is processed through a key derivation
-  * function (KDF) to generate a cryptographic key. The key derivation process
-  * ensures that the resulting key has sufficient entropy and is suitable for
-  * encryption. \- Encryption Algorithm: The file is encrypted using a symmetric
-  * encryption algorithm (such as AES, DES, or 3DES) along with the derived
-  * cryptographic key. Symmetric encryption algorithms use the same key for both
-  * encryption and decryption. \- Encryption Process: Each block of data in the
-  * file is processed through the encryption algorithm using the cryptographic
-  * key, resulting in ciphertext. The encryption process transforms the
+/**
+  * \- Key Derivation: The password is processed through a key derivation function (KDF) to generate
+  * a cryptographic key. The key derivation process ensures that the resulting key has sufficient
+  * entropy and is suitable for encryption. \- Encryption Algorithm: The file is encrypted using a
+  * symmetric encryption algorithm (such as AES, DES, or 3DES) along with the derived cryptographic
+  * key. Symmetric encryption algorithms use the same key for both encryption and decryption. \-
+  * Encryption Process: Each block of data in the file is processed through the encryption algorithm
+  * using the cryptographic key, resulting in ciphertext. The encryption process transforms the
   * plaintext data into ciphertext, which appears random and unintelligible.
   */
 

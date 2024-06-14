@@ -1,12 +1,13 @@
-import java.net.URL
 import java.net.HttpURLConnection
+import java.net.URL
 import java.security.KeyStore
-import javax.crypto.SecretKey
-import javax.crypto.SecretKeyFactory
+import java.util.Base64
+
+import javax.crypto.spec.DHPublicKeySpec
 import javax.crypto.spec.PBEKeySpec
 import javax.crypto.spec.SecretKeySpec
-import javax.crypto.spec.DHPublicKeySpec
-import java.util.Base64
+import javax.crypto.SecretKey
+import javax.crypto.SecretKeyFactory
 
 object CertificateExample extends App {
 
@@ -44,8 +45,8 @@ object CertificateExample extends App {
 // PBKDF2WithHmacSHA512
 
   def getKeyFromPassword256(password: String, salt: String) = {
-    val factory     = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256")
-    val spec        =
+    val factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256")
+    val spec =
       new PBEKeySpec(password.toCharArray(), salt.getBytes(), 65536, 256);
     val originalKey =
       new SecretKeySpec(factory.generateSecret(spec).getEncoded(), "AES");
@@ -53,8 +54,8 @@ object CertificateExample extends App {
   }
 
   def getKeyFromPassword384(password: String, salt: String) = {
-    val factory     = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA384")
-    val spec        =
+    val factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA384")
+    val spec =
       new PBEKeySpec(password.toCharArray(), salt.getBytes(), 65536, 256);
     val originalKey =
       new SecretKeySpec(factory.generateSecret(spec).getEncoded(), "AES");
@@ -62,15 +63,16 @@ object CertificateExample extends App {
   }
 
   def getKeyFromPassword512(password: String, salt: String) = {
-    val factory     = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512")
-    val spec        =
+    val factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512")
+    val spec =
       new PBEKeySpec(password.toCharArray(), salt.getBytes(), 65536, 256);
     val originalKey =
       new SecretKeySpec(factory.generateSecret(spec).getEncoded(), "AES");
     originalKey
   }
-  val spec                                                  = getKeyFromPassword256("hello", "dude33434343")
-  val rawData                                               = spec.getEncoded()
+
+  val spec    = getKeyFromPassword256("hello", "dude33434343")
+  val rawData = spec.getEncoded()
 
   val spec1    = getKeyFromPassword256("hello", "dude33434343")
   val rawData1 = spec1.getEncoded()

@@ -4,10 +4,7 @@ The network needs to satisfy the following(Kubernetes) requirements:
 3. The IP that a container sees itself as is the same IP that others see it as
 
 
-
 ## Container
-
-
 
 
 

@@ -1,7 +1,7 @@
 scalaVersion := "2.13.12"
 
-name                                              := "Nginx"
-version                                           := "1.0"
+name    := "Java-Security" := "Nginx"
+version := "1.0"
 // https://mvnrepository.com/artifact/software.amazon.cryptools/AmazonCorrettoCryptoProvider
 libraryDependencies += "software.amazon.cryptools" % "AmazonCorrettoCryptoProvider" % "2.3.3"
 
